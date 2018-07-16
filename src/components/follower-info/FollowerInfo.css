@@ -1,0 +1,11 @@
+.FollowerInfo {
+    width: 100%;
+    font-size: small;
+}
+.root {
+    width: 100%;
+    overflowX: 'auto';
+}
+.table {
+    minWidth: 700,
+}
