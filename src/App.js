@@ -17,14 +17,14 @@ export default class App extends Component {
         </div>
         <div className='App-container'>
           <Grid container>
-            <Grid item xs={0} md={3}/>
+            <Grid item md={3}/>
             <Grid item xs={12} md={6}>
               <Switch>
                 <Route exact path='/' component={Profile}/>
                 <Route path='/picture/:id' component={PictureView}/>
               </Switch>
             </Grid>
-            <Grid item xs={0} md={3}/>
+            <Grid item md={3}/>
           </Grid>
         </div>
       </div>

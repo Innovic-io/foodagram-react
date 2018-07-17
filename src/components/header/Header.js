@@ -38,7 +38,7 @@ class Header extends Component {
       <div>
         <AppBar position="static" color='inherit' className={classes.appBar}>
           <Grid container>
-            <Grid item xs={0} md={3}/>
+            <Grid item md={3}/>
             <Grid item xs={12} md={6}>
               <Toolbar>
                 <Link to="/">
@@ -53,7 +53,7 @@ class Header extends Component {
                 </IconButton>
               </Toolbar>
             </Grid>
-            <Grid item xs={0} md={3}/>
+            <Grid item md={3}/>
           </Grid>
         </AppBar>
       </div>
