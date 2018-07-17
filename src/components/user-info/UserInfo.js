@@ -40,7 +40,7 @@ class UserInfo extends Component {
           <Typography variant="display1" color={'inherit'} gutterBottom align={'left'}>
             {this.props.name}
           </Typography>
-            <FollowerInfo posts={tileData.length} followers='326' following='251'/>
+            <FollowerInfo posts={tileData.length} followers='1m' following='251'/>
           <Typography variant="subheading" align={'left'}>
             Urna duis convallis convallis tellus id interdum. Sit amet cursus sit amet dictum sit. Euismod elementum nisi quis eleifend.
           </Typography>
