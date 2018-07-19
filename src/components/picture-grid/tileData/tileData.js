@@ -7,6 +7,26 @@ export const tileData = [
     cols: 2,
     featured: true,
     yummies: 0,
+    comments: [
+      {
+        id: 1000,
+        username: 'username',
+        tags: [],
+        comment: '1stcomm'
+      },
+      {
+        id: 1001,
+        username: 'username',
+        tags: [],
+        comment: '1stcomm'
+      },
+      {
+        id: 1002,
+        username: 'username',
+        tags: [],
+        comment: '1stcomm'
+      },
+    ],
   },
   {
     id: '1',
@@ -14,6 +34,7 @@ export const tileData = [
     title: 'Chicken wings',
     author: 'director90',
     yummies: 0,
+    comments: [],
   },
   {
     id: '2',
@@ -21,6 +42,7 @@ export const tileData = [
     title: 'Pasta',
     author: 'Danson67',
     yummies: 0,
+    comments: [],
   },
   {
     id: '3',
@@ -28,5 +50,6 @@ export const tileData = [
     title: 'Sushi',
     author: 'Ivana25',
     yummies: 0,
+    comments: [],
   },
 ];

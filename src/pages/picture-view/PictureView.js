@@ -7,9 +7,12 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
-import { tileData } from "../../components/picture-grid/tileData/tileData";
 import Bookmark from '@material-ui/icons/Bookmark'
 import IconButton from '@material-ui/core/IconButton';
+
+import Input from '../../components/text-field/TextField';
+import Comments from '../../components/comments/Comments'
+import { tileData } from "../../components/picture-grid/tileData/tileData";
 
 const styles = theme => ({
   appBorder: {
@@ -44,6 +47,9 @@ const styles = theme => ({
     margin: 10,
     justifyContent: 'center',
   },
+  bookmark: {
+
+  }
 });
 
 class PictureView extends Component {
@@ -55,8 +61,9 @@ class PictureView extends Component {
 
     this.state = {
       id: id,
-      yummies: tileData.find(value => value.id === id).yummies
-    }
+      yummies: tileData.find(value => value.id === id).yummies,
+      comments: tileData.find(value => value.id === id).comments,
+    };
   }
 
   yummiesIncrement = (id) => {
@@ -64,6 +71,20 @@ class PictureView extends Component {
     this.setState({
       yummies: ++item.yummies,
     });
+  };
+
+  onSubmitComment = (data) => {
+
+    tileData.find(value => value.id === data.id).comments.push({
+      id: Math.round(Math.random()*10000000000),
+      comment: data.comment,
+      username: 'aaa',
+      tags: []
+    });
+
+    this.setState({
+      comments: tileData.find(value => value.id === data.id).comments
+    })
   };
 
   render() {
@@ -87,15 +108,15 @@ class PictureView extends Component {
           <Grid container className={classes.content}>
             <Grid item xs={4} md={4}>
               <IconButton>
-                <FavoriteIcon className={ (this.state.yummies >= 5) ? classes.yummiesColor : FavoriteIcon } onClick={ () => this.yummiesIncrement(this.state.id)}/>
+                <FavoriteIcon className={ (this.state.yummies >= 5) ? classes.yummiesColor : null} onClick={ () => this.yummiesIncrement(this.state.id)}/>
               </IconButton>
             </Grid>
-            <Grid item xs={4} md={4} >
+            <Grid item xs={4} md={4} className={classes.bookmark}>
               <IconButton>
                 <ShareIcon/>
               </IconButton>
             </Grid>
-            <Grid item xs={4} md={4} >
+            <Grid item xs={4} md={4} className={classes.bookmark}>
               <IconButton>
                 <Bookmark/>
               </IconButton>
@@ -103,12 +124,19 @@ class PictureView extends Component {
             <Grid item xs={12} md={12}>
               <Typography> {this.state.yummies} people find this yummy</Typography>
             </Grid>
+            <Grid item xs={12} md={12} className={classes.avatar}>
+              <Comments comments={this.state.comments} />
+            </Grid>
+            <Grid item xs={12} md={12} className={classes.avatar}>
+              <Input onSubmitComment={(comment) => this.onSubmitComment(comment)} id={this.state.id}/>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
     )
   }
 }
+
 PictureView.propTypes = {
   classes: PropTypes.object.isRequired,
 };

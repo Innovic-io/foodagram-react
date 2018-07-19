@@ -4,8 +4,6 @@ import UserInfo from "../../components/user-info/UserInfo";
 import Menu from "../../components/menu/Menu";
 import PictureGrid from "../../components/picture-grid/PictureGrid";
 
-
-
 export default class Profile extends Component {
 
   navigateTo(id) {

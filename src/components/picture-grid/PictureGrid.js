@@ -38,8 +38,8 @@ class PictureGrid extends Component {
 
     return(
       <div className={classes.root}>
-        <GridList cellHeight={360} className={classes.gridList}>
-          <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
+        <GridList cellHeight={360} cols={3} className={classes.gridList}>
+          <GridListTile key="Subheader" cols={3} style={{ height: 'auto' }}>
           </GridListTile>
           {tileData.map(tile => (
             <GridListTile key={tile.img} onClick={event => this.pictureClick(tile.id)}>
