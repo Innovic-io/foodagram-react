@@ -46,7 +46,7 @@ const styles = theme => ({
 
 class Input extends Component {
 
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -58,8 +58,8 @@ class Input extends Component {
   submit = (event) => {
     event.preventDefault();
 
-    this.props.onSubmitComment({ id: this.state.id, comment: this.state.comment});
-    this.setState ({
+    this.props.onSubmitComment({id: this.state.id, comment: this.state.comment});
+    this.setState({
       comment: '',
     })
   };
