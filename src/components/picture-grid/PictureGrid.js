@@ -7,6 +7,7 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
+import Fade from '@material-ui/core/Fade';
 
 import './PictureGrid.css';
 import { tileData } from '../picture-grid/tileData/tileData'
@@ -18,8 +19,7 @@ const styles = theme => ({
     justifyContent: 'space-around',
     overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
-  },
-  gridList: {
+    width: '100%'
   },
   icon: {
     color: 'rgba(255, 255, 255, 0.54)',
@@ -28,17 +28,32 @@ const styles = theme => ({
 
 class PictureGrid extends Component {
 
+  constructor(props){
+    super(props);
+
+    this.state = {
+      clicked: false,
+      cols: props.cols,
+      cellHeight: props.cellHeight,
+    }
+  }
+
   pictureClick = (id) => {
     this.props.clickOnImage(id);
   };
 
+  handleChange = () => {
+    this.setState(state => ({ clicked: !state.clicked }));
+  };
+
   render() {
 
-    const { classes } = this.props;
+    const { classes, gridInfo } = this.props;
+    const { clicked } = this.state;
 
     return(
       <div className={classes.root}>
-        <GridList cellHeight={360} cols={3} className={classes.gridList}>
+        <GridList cols={gridInfo.cols} cellHeight={gridInfo.cellHeight}>
           <GridListTile key="Subheader" cols={3} style={{ height: 'auto' }}>
           </GridListTile>
           {tileData.map(tile => (
@@ -49,7 +64,7 @@ class PictureGrid extends Component {
                 subtitle={<span>by: {tile.author}</span>}
                 actionIcon={
                   <IconButton className={classes.icon}>
-                    <InfoIcon />
+                    <InfoIcon onClick={this.handleChange}/>
                   </IconButton>
                 }
               />

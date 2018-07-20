@@ -24,8 +24,8 @@ class Comments extends Component {
       <List dense={true} disablePadding={true}>
         {
         this.state.comments.map(comment => (
-          <ListItem disableGutters={true} key={comment.id}>
-            <ListItemText
+          <ListItem disableGutters={true}  key={comment.id}>
+            <ListItemText textDense={true}
               primary={comment.comment}
               secondary={comment.username}
             />

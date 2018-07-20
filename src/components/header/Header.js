@@ -48,7 +48,9 @@ class Header extends Component {
                   FoodaGram
                 </Typography>
                 <IconButton>
-                  <AccountCircle  className={classes.icons}/>
+                  <AccountCircle/>
+                </IconButton>
+                <IconButton>
                   <FavoriteIcon/>
                 </IconButton>
               </Toolbar>

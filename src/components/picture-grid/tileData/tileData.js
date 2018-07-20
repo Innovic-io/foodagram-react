@@ -6,25 +6,25 @@ export const tileData = [
     author: 'jill111',
     cols: 2,
     featured: true,
-    yummies: 0,
+    yummies: 7,
     comments: [
       {
         id: 1000,
-        username: 'username',
+        username: 'someone',
         tags: [],
-        comment: '1stcomm'
+        comment: 'veggies <3'
       },
       {
         id: 1001,
-        username: 'username',
+        username: 'arab',
         tags: [],
-        comment: '1stcomm'
+        comment: 'need something more meaty'
       },
       {
         id: 1002,
-        username: 'username',
+        username: 'hensn',
         tags: [],
-        comment: '1stcomm'
+        comment: 'add some dressing haha'
       },
     ],
   },
@@ -50,6 +50,30 @@ export const tileData = [
     title: 'Sushi',
     author: 'Ivana25',
     yummies: 0,
+    comments: [],
+  },
+  {
+    id: '4',
+    img: '/images/5.jpg',
+    title: 'Chocolate cake',
+    author: 'JM',
+    yummies: 23,
+    comments: [],
+  },
+  {
+    id: '5',
+    img: '/images/6.jpg',
+    title: 'American burger',
+    author: 'JM',
+    yummies: 17,
+    comments: [],
+  },
+  {
+    id: '6',
+    img: '/images/7.jpg',
+    title: 'Crepes with nutella',
+    author: 'JM',
+    yummies: 36,
     comments: [],
   },
 ];

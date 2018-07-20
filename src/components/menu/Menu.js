@@ -1,30 +1,49 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-import FolderIcon from '@material-ui/icons/Folder'
+import ViewDay from '@material-ui/icons/ViewDay';
+import Tagged from '@material-ui/icons/AccountBox';
+import Saved from '@material-ui/icons/Bookmark'
+import ViewModule from '@material-ui/icons/ViewModule'
 
 const styles = {
-  root: {
-  },
+  root: {},
   buttonItem: {
     minWidth: '25%'
   }
 };
 
 
-class Menu extends Component{
+class Menu extends Component {
 
-  state = {
-    value: 'recents',
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      value: 'grid',
+    };
+  }
+
+  onGridViewClick = () => {
+
+    this.props.onViewChange({
+      cols: 3,
+      cellHeight: 180,
+    });
+  };
+
+  onListViewClick = () => {
+
+    this.props.onViewChange({
+      cols: 1,
+      cellHeight: 720,
+    });
   };
 
   handleChange = (event, value) => {
-    this.setState({ value });
+    this.setState({value});
   };
 
   render() {
@@ -33,10 +52,12 @@ class Menu extends Component{
 
     return (
       <BottomNavigation value={value} onChange={this.handleChange} className={classes.root}>
-        <BottomNavigationAction className={classes.buttonItem} label="Recents" value="recents" icon={<RestoreIcon />} />
-        <BottomNavigationAction className={classes.buttonItem} label="Favorites" value="favorites" icon={<FavoriteIcon />} />
-        <BottomNavigationAction className={classes.buttonItem} label="Nearby" value="nearby" icon={<LocationOnIcon />} />
-        <BottomNavigationAction className={classes.buttonItem} label="Folder" value="folder" icon={<FolderIcon/>} />
+        <BottomNavigationAction className={classes.buttonItem} label="GridView" value="grid" icon={<ViewModule/>}
+                                onClick={() => this.onGridViewClick()}/>
+        <BottomNavigationAction className={classes.buttonItem} label="ListView" value="list" icon={<ViewDay/>}
+                                onClick={() => this.onListViewClick()}/>
+        <BottomNavigationAction className={classes.buttonItem} label="Tagged" value="tagged" icon={<Tagged/>}/>
+        <BottomNavigationAction className={classes.buttonItem} label="Saved" value="saved" icon={<Saved/>}/>
       </BottomNavigation>
     );
   }
