@@ -7,8 +7,6 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
-import Fade from '@material-ui/core/Fade';
-
 import './PictureGrid.css';
 import { tileData } from '../picture-grid/tileData/tileData'
 
@@ -32,12 +30,20 @@ class PictureGrid extends Component {
     super(props);
 
     this.state = {
-      clicked: false,
+      flipped: null,
       cols: props.cols,
       cellHeight: props.cellHeight,
     }
   }
+  mouseOut() {
 
+    this.setState({flipped: false});
+  }
+
+  mouseOver() {
+
+    this.setState({flipped: true});
+  }
   pictureClick = (id) => {
     this.props.clickOnImage(id);
   };
@@ -49,15 +55,14 @@ class PictureGrid extends Component {
   render() {
 
     const { classes, gridInfo } = this.props;
-    const { clicked } = this.state;
 
     return(
       <div className={classes.root}>
         <GridList cols={gridInfo.cols} cellHeight={gridInfo.cellHeight}>
-          <GridListTile key="Subheader" cols={3} style={{ height: 'auto' }}>
+          <GridListTile  key="Subheader" cols={3} style={{ height: 'auto' }}>
           </GridListTile>
           {tileData.map(tile => (
-            <GridListTile key={tile.img} onClick={event => this.pictureClick(tile.id)}>
+            <GridListTile onMouseLeave={() => this.mouseOut()} onMouseEnter={() => this.mouseOver()} key={tile.img} onClick={event => this.pictureClick(tile.id)}>
               <img src={tile.img} alt={tile.title} />
               <GridListTileBar
                 title={tile.title}

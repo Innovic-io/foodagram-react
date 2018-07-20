@@ -21,11 +21,11 @@ class Comments extends Component {
   render() {
 
     return(
-      <List dense={true} disablePadding={true}>
+      <List disablePadding={true}>
         {
         this.state.comments.map(comment => (
           <ListItem disableGutters={true}  key={comment.id}>
-            <ListItemText textDense={true}
+            <ListItemText
               primary={comment.comment}
               secondary={comment.username}
             />
