@@ -68,10 +68,9 @@ class PictureGrid extends Component {
     })
   }
 
-
   render() {
 
-    const { classes, gridInfo } = this.props;
+    const {classes, gridInfo} = this.props;
     console.log(this.state.mouseOver);
     return (
       <div className={classes.root}>
@@ -94,8 +93,6 @@ class PictureGrid extends Component {
                   </IconButton>
                 }
               />
-
-
             </GridListTile>
           ))}
         </GridList>
