@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
 import './PictureGrid.css';
-import { tileData } from '../picture-grid/tileData/tileData'
+import {tileData} from '../picture-grid/tileData/tileData';
 
 const styles = theme => ({
   root: {
@@ -22,49 +22,70 @@ const styles = theme => ({
   icon: {
     color: 'rgba(255, 255, 255, 0.54)',
   },
+  visibilityHidden: {
+    visibility: 'hidden',
+  },
+  visibilityVisible: {
+    visibility: 'visible',
+  }
 });
 
 class PictureGrid extends Component {
 
-  constructor(props){
+  pictureClick = (id) => {
+    this.props.clickOnImage(id);
+  };
+  handleChange = () => {
+    this.setState(state => ({clicked: !state.clicked}));
+  };
+
+  constructor(props) {
     super(props);
 
+    this.nodes = new Map();
+
     this.state = {
-      flipped: null,
+      mouseOver: false,
       cols: props.cols,
       cellHeight: props.cellHeight,
     }
   }
-  mouseOut() {
 
-    this.setState({flipped: false});
+  mouseOut(i) {
+    const element = this.nodes.get(i);
+
+    //this.nodes.set napisati u jsx i nekako tu apdejtovati
+
+    this.setState({
+      mouseOver: false,
+    });
   }
 
-  mouseOver() {
-
-    this.setState({flipped: true});
+  mouseOver(i) {
+    //const element = this.nodes.get(i);
+    this.setState({
+      mouseOver: true,
+    })
   }
-  pictureClick = (id) => {
-    this.props.clickOnImage(id);
-  };
 
-  handleChange = () => {
-    this.setState(state => ({ clicked: !state.clicked }));
-  };
 
   render() {
 
     const { classes, gridInfo } = this.props;
-
-    return(
+    console.log(this.state.mouseOver);
+    return (
       <div className={classes.root}>
         <GridList cols={gridInfo.cols} cellHeight={gridInfo.cellHeight}>
-          <GridListTile  key="Subheader" cols={3} style={{ height: 'auto' }}>
+          <GridListTile key="Subheader" cols={3} style={{height: 'auto'}}>
           </GridListTile>
-          {tileData.map(tile => (
-            <GridListTile onMouseLeave={() => this.mouseOut()} onMouseEnter={() => this.mouseOver()} key={tile.img} onClick={event => this.pictureClick(tile.id)}>
-              <img src={tile.img} alt={tile.title} />
+          {tileData.map((tile, i) => (
+            <GridListTile onMouseLeave={() => this.mouseOut(i)} onMouseEnter={() => this.mouseOver(i)} key={tile.img}
+                          onClick={event => this.pictureClick(tile.id)}>
+              <img src={tile.img} alt={tile.title}/>
               <GridListTileBar
+                ref={c => this.nodes.set(i, c)}
+                key={i}
+                className={(this.state.mouseOver === true) ? classes.visibilityVisible : classes.visibilityHidden}
                 title={tile.title}
                 subtitle={<span>by: {tile.author}</span>}
                 actionIcon={
@@ -73,6 +94,8 @@ class PictureGrid extends Component {
                   </IconButton>
                 }
               />
+
+
             </GridListTile>
           ))}
         </GridList>

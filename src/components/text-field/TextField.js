@@ -56,7 +56,7 @@ class Input extends Component {
   }
 
   submit = (event) => {
-    event.preventDefault();
+    event.preventDefault(); //so that the page does not refresh
 
     this.props.onSubmitComment({id: this.state.id, comment: this.state.comment});
     this.setState({
