@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
@@ -23,6 +23,7 @@ const styles = theme => ({
     marginTop: 50,
     marginBottom: 50,
     backgroundColor: theme.palette.background.paper,
+    maxHeight: 540
   },
   separator: {
     borderBottomWidth: 1,
@@ -38,7 +39,6 @@ const styles = theme => ({
     flexDirection: 'column',
   },
   content: {
-    marginTop: 20,
   },
   yummiesColor: {
     color: 'red',
@@ -46,8 +46,29 @@ const styles = theme => ({
   avatar: {
     margin: 10,
     justifyContent: 'center',
+
   },
-  bookmark: {}
+  buttonContainer: {
+    display: 'flex',
+  },
+  buttonSave: {
+    flexGrow: 1,
+    textAlign: 'right'
+  },
+  rightSideFlex: {
+    display: 'flex',
+    width: '100%',
+    flexDirection: 'column',
+  },
+  sideFlexCommentBox: {
+    flexGrow: 1,
+    maxHeight: '130px',
+    minHeight: '130px',
+    overflow: 'auto'
+  },
+  sideDisableGrow: {
+    flexBasis: 'auto'
+  }
 });
 
 class PictureView extends Component {
@@ -55,14 +76,29 @@ class PictureView extends Component {
   constructor(props) {
     super(props);
 
-    const {id} = this.props.match.params;
+    const { id } = this.props.match.params;
 
     this.state = {
       id: id,
+      commentHeight: {
+        maxHeight: '100px',
+      },
       yummies: tileData.find(value => value.id === id).yummies,
       comments: tileData.find(value => value.id === id).comments,
     };
   }
+
+  getImageHeight(ref) {
+    setTimeout(() => {
+      if (ref) {
+        this.setState({
+          commentHeight: {
+            maxHeight: (ref.height - 165) + 'px'
+          }
+        })
+      }
+    }, 1)
+  };
 
   yummiesIncrement = (id) => {
     const [item] = tileData.filter(value => value.id === id);
@@ -92,7 +128,7 @@ class PictureView extends Component {
     return (
       <Grid container className={classes.appBorder}>
         <Grid className={classes.img} item xs={12} md={8}>
-          <img width='100%' src={tileData.find(value => value.id === this.state.id).img} alt=''/>
+          <img width='100%' ref={(ref) => this.getImageHeight(ref)}  src={tileData.find(value => value.id === this.state.id).img} alt=''/>
         </Grid>
         <Grid item xs={12} md={4}>
           <Grid container className={classes.separator}>
@@ -104,31 +140,42 @@ class PictureView extends Component {
             </Grid>
           </Grid>
           <Grid container className={classes.content}>
-            <Grid item xs={4} md={4}>
-              <IconButton>
-                <FavoriteIcon className={(this.state.yummies >= 5) ? classes.yummiesColor : null}
-                              onClick={() => this.yummiesIncrement(this.state.id)}/>
-              </IconButton>
-            </Grid>
-            <Grid item xs={4} md={4} className={classes.bookmark}>
-              <IconButton>
-                <ShareIcon/>
-              </IconButton>
-            </Grid>
-            <Grid item xs={4} md={4} className={classes.bookmark}>
-              <IconButton>
-                <Bookmark/>
-              </IconButton>
-            </Grid>
-            <Grid item xs={12} md={12}>
-              <Typography> {this.state.yummies} people find this yummy</Typography>
-            </Grid>
-            <Grid item xs={12} md={12} className={classes.avatar}>
-              <Comments comments={this.state.comments}/>
-            </Grid>
-            <Grid item xs={12} md={12} className={classes.avatar}>
-              <Input onSubmitComment={(comment) => this.onSubmitComment(comment)} id={this.state.id}/>
-            </Grid>
+
+            <div className={classes.rightSideFlex}>
+
+              <Grid item xs={12} md={12} className={classes.sideDisableGrow}>
+                <div className={classes.buttonContainer}>
+                  <IconButton>
+                    <FavoriteIcon className={(this.state.yummies >= 5) ? classes.yummiesColor : null}
+                                  onClick={() => this.yummiesIncrement(this.state.id)}/>
+                  </IconButton>
+                  <IconButton>
+                    <ShareIcon/>
+                  </IconButton>
+                  <div className={classes.buttonSave}>
+                    <IconButton >
+                      <Bookmark/>
+                    </IconButton>
+                  </div>
+                </div>
+              </Grid>
+
+              <Grid item xs={12} md={12} className={classes.sideDisableGrow}>
+                <Typography align={"center"} variant={"caption"}> {this.state.yummies} people find this yummy</Typography>
+              </Grid>
+
+              <div className={classes.sideFlexCommentBox} style={this.state.commentHeight}>
+                <Grid item xs={12} md={12}>
+                  <Comments comments={this.state.comments}/>
+                </Grid>
+              </div>
+
+              <Grid item xs={12} md={12} className={classes.sideDisableGrow}>
+                <Input onSubmitComment={(comment) => this.onSubmitComment(comment)} id={this.state.id}/>
+              </Grid>
+
+            </div>
+
           </Grid>
         </Grid>
       </Grid>

@@ -5,8 +5,6 @@ import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({
   container: {
-    display: 'flex',
-    flexWrap: 'wrap',
   },
   bootstrapRoot: {
     padding: 0,
@@ -20,7 +18,7 @@ const styles = theme => ({
     border: '1px solid #ced4da',
     fontSize: 16,
     padding: '10px 12px',
-    width: 'calc(100% - 24px)',
+    width: '100%',
     transition: theme.transitions.create(['border-color', 'box-shadow']),
     fontFamily: [
       '-apple-system',
@@ -40,8 +38,11 @@ const styles = theme => ({
     },
   },
   bootstrapFormLabel: {
-    fontSize: 18,
+    fontSize: 16,
   },
+  inputField: {
+    width: '100%',
+  }
 });
 
 class Input extends Component {
@@ -82,6 +83,7 @@ class Input extends Component {
           id="comment"
           value={this.state.comment}
           onChange={this.handleChange('comment')}
+          className={classes.inputField}
           InputProps={{
             disableUnderline: true,
             classes: {

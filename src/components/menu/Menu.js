@@ -38,7 +38,7 @@ class Menu extends Component {
 
     this.props.onViewChange({
       cols: 1,
-      cellHeight: 720,
+      cellHeight: 360,
     });
   };
 

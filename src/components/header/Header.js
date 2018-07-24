@@ -42,7 +42,7 @@ class Header extends Component {
             <Grid item xs={12} md={6}>
               <Toolbar>
                 <Link to="/">
-                  <img className={'App-logo'} src='/images/tasty.png' alt=''></img>
+                  <img className={'App-logo'} src='/images/logo-bigger.png' alt=''></img>
                 </Link>
                 <Typography variant="title" color="inherit" className={classes.flex}>
                   FoodaGram
