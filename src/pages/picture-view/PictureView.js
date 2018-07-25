@@ -61,6 +61,7 @@ const styles = theme => ({
     flexDirection: 'column',
   },
   sideFlexCommentBox: {
+    padding: 20,
     flexGrow: 1,
     maxHeight: '130px',
     minHeight: '130px',
@@ -73,32 +74,17 @@ const styles = theme => ({
 
 class PictureView extends Component {
 
-  constructor(props) {
-    super(props);
+  static getDerivedStateFromProps(nextProps, prevState) {
 
-    const { id } = this.props.match.params;
+    const { id } = nextProps.match.params;
 
-    this.state = {
+    return {
       id: id,
-      commentHeight: {
-        maxHeight: '100px',
-      },
+      imgUrl: tileData.find(value => value.id === id).img,
       yummies: tileData.find(value => value.id === id).yummies,
       comments: tileData.find(value => value.id === id).comments,
     };
   }
-
-  getImageHeight(ref) {
-    setTimeout(() => {
-      if (ref) {
-        this.setState({
-          commentHeight: {
-            maxHeight: (ref.height - 165) + 'px'
-          }
-        })
-      }
-    }, 1)
-  };
 
   yummiesIncrement = (id) => {
     const [item] = tileData.filter(value => value.id === id);
@@ -116,10 +102,22 @@ class PictureView extends Component {
       tags: []
     });
 
+
+    this.setState((prevState, props) => {
+      return { comments: tileData.find(value => value.id === data.id).comments }
+    })
+  };
+
+    /*
     this.setState({
       comments: tileData.find(value => value.id === data.id).comments
     })
-  };
+  }; */
+
+
+    getImgUrl = () => {
+      return tileData.find(value => value.id === this.state.id).img;
+    };
 
   render() {
 
@@ -128,7 +126,7 @@ class PictureView extends Component {
     return (
       <Grid container className={classes.appBorder}>
         <Grid className={classes.img} item xs={12} md={8}>
-          <img width='100%' ref={(ref) => this.getImageHeight(ref)}  src={tileData.find(value => value.id === this.state.id).img} alt=''/>
+          <img width='100%' src={this.state.imgUrl} alt=''/>
         </Grid>
         <Grid item xs={12} md={4}>
           <Grid container className={classes.separator}>
@@ -164,7 +162,7 @@ class PictureView extends Component {
                 <Typography align={"center"} variant={"caption"}> {this.state.yummies} people find this yummy</Typography>
               </Grid>
 
-              <div className={classes.sideFlexCommentBox} style={this.state.commentHeight}>
+              <div className={classes.sideFlexCommentBox}>
                 <Grid item xs={12} md={12}>
                   <Comments comments={this.state.comments}/>
                 </Grid>

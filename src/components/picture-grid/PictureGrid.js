@@ -30,6 +30,7 @@ class PictureGrid extends Component {
   pictureClick = (id) => {
     this.props.clickOnImage(id);
   };
+
   handleChange = () => {
     this.setState(state => ({clicked: !state.clicked}));
   };
