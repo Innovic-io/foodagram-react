@@ -60,13 +60,16 @@ class UserInfo extends Component {
             </Grid>
 
             <Grid item xs={7} sm={7} className={classes.button}>
-              <Button variant="outlined">
+              <Button size={"small"} variant="outlined">
                 Edit Profile
               </Button>
             </Grid>
 
             <Grid item xs={12} sm={12}>
               <FollowerInfo posts={tileData.length} followers='1m' following='251'/>
+              <Typography variant='body1' align={'left'} >
+                {this.props.name}
+              </Typography>
               <Typography variant='caption' align={'left'}>
                 Urna duis convallis convallis tellus id interdum. Sit amet cursus sit amet dictum sit. Euismod elementum nisi quis eleifend.
               </Typography>

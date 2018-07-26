@@ -71,9 +71,9 @@ class PictureGrid extends Component {
           <GridListTile key='Subheader' cols={3} style={{height: 'auto'}}>
           </GridListTile>
           {tileData.map((tile, i) => (
-            <GridListTile onMouseLeave={() => this.mouseOut(i)} onMouseEnter={() => this.mouseOver(i)} key={tile.img}
+            <GridListTile onMouseLeave={() => this.mouseOut(i)} onMouseEnter={() => this.mouseOver(i)} key={tile.id}
                           onClick={event => this.pictureClick(tile.id)}>
-              <img src={tile.img} alt={tile.title}/>
+              <img src={tile.img[0].path} alt={tile.title}/>
               <Slide in={(this.state.mouseOver === i)} direction='up' unmountOnExit>
                 <GridListTileBar
                   key={i}

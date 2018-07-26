@@ -1,7 +1,11 @@
 export const tileData = [
   {
     id: '0',
-    img: '/images/1.jpeg',
+    img: [
+      {
+        path: '/images/1.jpeg'
+      }
+    ],
     title: 'Salad',
     author: 'jill111',
     cols: 2,
@@ -30,7 +34,11 @@ export const tileData = [
   },
   {
     id: '1',
-    img: '/images/2.jpg',
+    img: [
+        {
+          path: '/images/2.jpg'
+        }
+      ],
     title: 'Chicken wings',
     author: 'director90',
     yummies: 0,
@@ -38,7 +46,11 @@ export const tileData = [
   },
   {
     id: '2',
-    img: '/images/3.jpg',
+    img: [
+      {
+        path: '/images/3.jpg'
+      }
+    ],
     title: 'Pasta',
     author: 'Danson67',
     yummies: 0,
@@ -46,7 +58,11 @@ export const tileData = [
   },
   {
     id: '3',
-    img: '/images/4.jpg',
+    img: [
+      {
+        path: '/images/4.jpg'
+      }
+    ],
     title: 'Sushi',
     author: 'Ivana25',
     yummies: 0,
@@ -54,7 +70,11 @@ export const tileData = [
   },
   {
     id: '4',
-    img: '/images/5.jpg',
+    img: [
+      {
+        path: '/images/5.jpg'
+      }
+    ],
     title: 'Chocolate cake',
     author: 'JM',
     yummies: 23,
@@ -62,7 +82,11 @@ export const tileData = [
   },
   {
     id: '5',
-    img: '/images/6.jpg',
+    img: [
+      {
+        path: '/images/6.jpg'
+      }
+    ],
     title: 'American burger',
     author: 'JM',
     yummies: 17,
@@ -70,10 +94,36 @@ export const tileData = [
   },
   {
     id: '6',
-    img: '/images/7.jpg',
+    img: [
+      {
+        path: '/images/7.jpg'
+      }
+    ],
     title: 'Crepes with nutella',
     author: 'JM',
     yummies: 36,
+    comments: [],
+  },
+  {
+    id: '7',
+    img: [
+      {
+        description: 'Watermellon smoothie',
+        path: '/images/8.jpg'
+      },
+      {
+        path: '/images/9.jpg'
+      },
+      {
+        path: '/images/10.jpg'
+      },
+      {
+        path: '/images/11.jpg'
+      }
+    ],
+    title: 'smoothies',
+    author: 'mjason',
+    yummies: 15,
     comments: [],
   },
 ];
