@@ -29,7 +29,6 @@ class ToolBar extends Component {
   render() {
 
     const { classes, yummies, id, onYummiesIncrement } = this.props;
-    console.log(onYummiesIncrement);
 
     return(
       <Grid item xs={12} md={12} className={classes.sideDisableGrow}>
