@@ -5,26 +5,7 @@ import Button from '@material-ui/core/Button';
 import NavigateNext from '@material-ui/icons/NavigateNext';
 import NavigateBefore from '@material-ui/icons/NavigateBefore';
 import { withStyles } from "@material-ui/core/styles";
-
-const styles = theme => ({
-  outerDiv: {
-    display: 'flex',
-    height: '100%',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
-    alignItems: 'center'
-  },
-  innerDiv: {
-    flexGrow: 1,
-  },
-  buttonLeft: {
-
-  },
-  buttonRight: {
-
-  }
-});
+import { styles } from "./styles";
 
 class ImageSlider extends Component {
 
@@ -65,7 +46,7 @@ class ImageSlider extends Component {
   };
 
   leftButton = () => {
-    if(this.state.slide.length > 1) {
+    if(this.state.slide.length > 1 && this.state.current > 0) {
       return (
         <Button variant='fab' mini onClick={() => this.handleBack()}>
           <NavigateBefore/>
@@ -75,7 +56,7 @@ class ImageSlider extends Component {
   };
 
   rightButton = () => {
-    if(this.state.slide.length > 1) {
+    if(this.state.slide.length > 1 && this.state.current < this.state.slide.length-1) {
       return (
         <Button variant='fab' mini onClick={() => this.handleNext()}>
           <NavigateNext />
@@ -89,13 +70,11 @@ class ImageSlider extends Component {
 
       return (
         <div className={classes.outerDiv} style={{backgroundImage: 'url(' + this.state.slide[this.state.current].path + ')'}}>
-          <div className={classes.buttonLeft}>
+          <div className={classes.button}>
             {this.leftButton()}
           </div>
-          <div className={classes.innerDiv}>
-
-          </div>
-          <div>
+          <div className={classes.innerDiv}></div>
+          <div className={classes.button}>
             {this.rightButton()}
           </div>
         </div>

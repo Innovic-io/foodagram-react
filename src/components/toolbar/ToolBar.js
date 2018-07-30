@@ -5,7 +5,9 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
-import Bookmark from '@material-ui/icons/Bookmark'
+import BookmarkBorder from '@material-ui/icons/BookmarkBorder';
+import Bookmark from '@material-ui/icons/Bookmark';
+
 import IconButton from '@material-ui/core/IconButton';
 
 const styles = theme => ({
@@ -21,10 +23,12 @@ const styles = theme => ({
   },
   sideDisableGrow: {
     flexBasis: 'auto'
-  }
+  },
 });
 
 class ToolBar extends Component {
+
+
 
   render() {
 
@@ -41,7 +45,7 @@ class ToolBar extends Component {
           </IconButton>
           <div className={classes.buttonSave}>
             <IconButton >
-              <Bookmark/>
+              <BookmarkBorder/>
             </IconButton>
           </div>
         </div>
