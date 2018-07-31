@@ -9,11 +9,10 @@ import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
 import './PictureGrid.css';
 import Slide from '@material-ui/core/Slide';
-import {tileData} from '../picture-grid/tileData/tileData';
 
 const styles = theme => ({
   root: {
-    display: 'flex',
+    display: 'block',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
@@ -70,7 +69,7 @@ class PictureGrid extends Component {
         <GridList cols={gridInfo.cols} cellHeight={gridInfo.cellHeight}>
           <GridListTile key='Subheader' cols={3} style={{height: 'auto'}}>
           </GridListTile>
-          {tileData.map((tile, i) => (
+          {gridInfo.tileData.map((tile, i) => (
             <GridListTile onMouseLeave={() => this.mouseOut(i)} onMouseEnter={() => this.mouseOver(i)} key={tile.id}
                           onClick={event => this.pictureClick(tile.id)}>
               <img src={tile.img[0].path} alt={tile.title}/>

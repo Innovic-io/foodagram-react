@@ -11,6 +11,7 @@ export const tileData = [
     cols: 2,
     featured: true,
     yummies: 7,
+    saved: false,
     comments: [
       {
         id: 1000,
@@ -42,6 +43,7 @@ export const tileData = [
     title: 'Chicken wings',
     author: 'director90',
     yummies: 0,
+    saved: false,
     comments: [],
   },
   {
@@ -54,6 +56,7 @@ export const tileData = [
     title: 'Pasta',
     author: 'Danson67',
     yummies: 0,
+    saved: false,
     comments: [],
   },
   {
@@ -66,6 +69,7 @@ export const tileData = [
     title: 'Sushi',
     author: 'Ivana25',
     yummies: 0,
+    saved: false,
     comments: [],
   },
   {
@@ -78,6 +82,7 @@ export const tileData = [
     title: 'Chocolate cake',
     author: 'JM',
     yummies: 23,
+    saved: false,
     comments: [],
   },
   {
@@ -90,6 +95,7 @@ export const tileData = [
     title: 'American burger',
     author: 'JM',
     yummies: 17,
+    saved: false,
     comments: [],
   },
   {
@@ -102,6 +108,7 @@ export const tileData = [
     title: 'Crepes with nutella',
     author: 'JM',
     yummies: 36,
+    saved: false,
     comments: [],
   },
   {
@@ -124,6 +131,7 @@ export const tileData = [
     title: 'smoothies',
     author: 'mjason',
     yummies: 15,
+    saved: false,
     comments: [],
   },
 ];

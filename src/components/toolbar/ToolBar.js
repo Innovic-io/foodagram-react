@@ -1,38 +1,20 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import { styles } from "./styles";
 
+import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import BookmarkBorder from '@material-ui/icons/BookmarkBorder';
 import Bookmark from '@material-ui/icons/Bookmark';
 
-import IconButton from '@material-ui/core/IconButton';
-
-const styles = theme => ({
-  yummiesColor: {
-    color: 'red',
-  },
-  buttonContainer: {
-    display: 'flex',
-  },
-  buttonSave: {
-    flexGrow: 1,
-    textAlign: 'right'
-  },
-  sideDisableGrow: {
-    flexBasis: 'auto'
-  },
-});
-
 class ToolBar extends Component {
-
-
 
   render() {
 
-    const { classes, yummies, id, onYummiesIncrement } = this.props;
+    const { classes, yummies, id, onYummiesIncrement, addRemoveSaved, saved } = this.props;
 
     return(
       <Grid item xs={12} md={12} className={classes.sideDisableGrow}>
@@ -44,8 +26,8 @@ class ToolBar extends Component {
             <ShareIcon/>
           </IconButton>
           <div className={classes.buttonSave}>
-            <IconButton >
-              <BookmarkBorder/>
+            <IconButton onClick={() => addRemoveSaved(id)}>
+              {saved ? (<Bookmark/>) : (<BookmarkBorder/>)}
             </IconButton>
           </div>
         </div>

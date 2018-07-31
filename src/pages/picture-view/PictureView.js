@@ -24,11 +24,14 @@ class PictureView extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     const { id } = nextProps.match.params;
 
+    const currentPicture = tileData.find(value => value.id === id);
+
     return {
       id: id,
-      img: tileData.find(value => value.id === id).img,
-      yummies: tileData.find(value => value.id === id).yummies,
-      comments: tileData.find(value => value.id === id).comments,
+      img: currentPicture.img,
+      yummies: currentPicture.yummies,
+      comments: currentPicture.comments,
+      saved: currentPicture.saved,
     };
   }
 
@@ -56,6 +59,14 @@ class PictureView extends Component {
     });
   };
 
+  addRemoveSaved = (id) => {
+    console.log(this.state.saved);
+    tileData.find(value => value.id === id).saved = !this.state.saved;
+
+    this.setState(prevState => ({
+      saved: !prevState.saved,
+    }))
+  };
   render() {
 
     const {classes} = this.props;
@@ -75,7 +86,7 @@ class PictureView extends Component {
           <Grid container className={classes.content}>
             <div className={classes.rightSideFlex}>
 
-              <ToolBar onYummiesIncrement={(pictureID) => this.yummiesIncrement(pictureID)} yummies={this.state.yummies} id={this.state.id}/>
+              <ToolBar onYummiesIncrement={(pictureID) => this.yummiesIncrement(pictureID)} addRemoveSaved={(picID) => this.addRemoveSaved(picID)} saved={this.state.saved} yummies={this.state.yummies} id={this.state.id}/>
 
               <Grid item xs={12} md={12} className={classes.sideDisableGrow}>
                 <Typography align={"center"} variant={"caption"}> {this.state.yummies} people find this yummy</Typography>

@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import ViewDay from '@material-ui/icons/ViewDay';
@@ -9,7 +9,8 @@ import Saved from '@material-ui/icons/Bookmark'
 import ViewModule from '@material-ui/icons/ViewModule'
 
 const styles = {
-  root: {},
+  root: {
+  },
   buttonItem: {
     minWidth: '25%'
   }
@@ -17,6 +18,10 @@ const styles = {
 
 
 class Menu extends Component {
+
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
 
   constructor(props) {
     super(props);
@@ -26,38 +31,20 @@ class Menu extends Component {
     };
   }
 
-  onGridViewClick = () => {
-
-    this.props.onViewChange({
-      cols: 3,
-      cellHeight: 180,
-    });
-  };
-
-  onListViewClick = () => {
-
-    this.props.onViewChange({
-      cols: 1,
-      cellHeight: 360,
-    });
-  };
-
-  handleChange = (event, value) => {
-    this.setState({value});
-  };
-
   render() {
-    const { classes } = this.props;
+
+    const { classes, onGridViewClick, onListViewClick,  onSavedViewClick} = this.props;
     const { value } = this.state;
+    console.log(onListViewClick, onGridViewClick, onSavedViewClick);
 
     return (
       <BottomNavigation value={value} onChange={this.handleChange} className={classes.root}>
-        <BottomNavigationAction className={classes.buttonItem} label="GridView" value="grid" icon={<ViewModule/>}
-                                onClick={() => this.onGridViewClick()}/>
+        <BottomNavigationAction className={classes.buttonItem} label="GridView" value="grid" icon={<ViewModule/>} onClick={() => onGridViewClick()}/>
         <BottomNavigationAction className={classes.buttonItem} label="ListView" value="list" icon={<ViewDay/>}
-                                onClick={() => this.onListViewClick()}/>
+                                onClick={() => onListViewClick()}/>
         <BottomNavigationAction className={classes.buttonItem} label="Tagged" value="tagged" icon={<Tagged/>}/>
-        <BottomNavigationAction className={classes.buttonItem} label="Saved" value="saved" icon={<Saved/>}/>
+        <BottomNavigationAction className={classes.buttonItem} label="Saved" value="saved"
+                                onClick={() => onSavedViewClick()} icon={<Saved/>}/>
       </BottomNavigation>
     );
   }
