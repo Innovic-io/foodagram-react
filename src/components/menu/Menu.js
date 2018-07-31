@@ -7,15 +7,7 @@ import ViewDay from '@material-ui/icons/ViewDay';
 import Tagged from '@material-ui/icons/AccountBox';
 import Saved from '@material-ui/icons/Bookmark'
 import ViewModule from '@material-ui/icons/ViewModule'
-
-const styles = {
-  root: {
-  },
-  buttonItem: {
-    minWidth: '25%'
-  }
-};
-
+import { styles } from "./styles";
 
 class Menu extends Component {
 
@@ -38,7 +30,7 @@ class Menu extends Component {
     console.log(onListViewClick, onGridViewClick, onSavedViewClick);
 
     return (
-      <BottomNavigation value={value} onChange={this.handleChange} className={classes.root}>
+      <BottomNavigation value={value} onChange={this.handleChange}>
         <BottomNavigationAction className={classes.buttonItem} label="GridView" value="grid" icon={<ViewModule/>} onClick={() => onGridViewClick()}/>
         <BottomNavigationAction className={classes.buttonItem} label="ListView" value="list" icon={<ViewDay/>}
                                 onClick={() => onListViewClick()}/>

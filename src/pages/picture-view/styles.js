@@ -21,6 +21,7 @@ export const styles = theme => ({
   img: {
     display: 'flex',
     flexDirection: 'column',
+    minHeight: '-webkit-fill-available',
   },
   avatar: {
     margin: 10,
@@ -38,8 +39,8 @@ export const styles = theme => ({
   sideFlexCommentBox: {
     padding: 20,
     flexGrow: 1,
-    maxHeight: '130px',
-    minHeight: '130px',
+    maxHeight: '325px',
+    minHeight: '325px',
     overflow: 'auto'
   },
   sideDisableGrow: {

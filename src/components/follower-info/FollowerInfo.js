@@ -3,21 +3,7 @@ import PropTypes from 'prop-types';
 
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-
-import './FollowerInfo.css';
-
-const styles = theme => ({
-  root: {
-    display: 'flex',
-    margin: '10px auto'
-  },
-  grow: {
-    flexGrow: 1
-  },
-  paper: {
-    background: 'none',
-  },
-});
+import { styles } from "./styles";
 
 class FollowerInfo extends Component {
 

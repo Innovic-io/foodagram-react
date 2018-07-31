@@ -7,32 +7,9 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button'
 
-import {tileData} from "../picture-grid/tileData/tileData";
+import {tileData} from "../../data/tileData/tileData";
 import FollowerInfo from "../follower-info/FollowerInfo";
-
-
-const styles = theme => ({
-  row: {
-    display: 'flex',
-    justifyContent: 'center',
-  },
-  avatar: {
-    marginTop: 20,
-    marginBottom: 20
-  },
-  bigAvatar: {
-    width: 'auto',
-    height: 'auto',
-    maxWidth: 100,
-    maxHeight: 100,
-  },
-  button: {
-    textAlign:  'right',
-  },
-  headline: {
-    margin: 30,
-  }
-});
+import { styles } from "./styles";
 
 class UserInfo extends Component {
 
@@ -41,7 +18,7 @@ class UserInfo extends Component {
     const { classes } = this.props;
 
     return (
-      <Grid container className={classes.avatar}>
+      <Grid container className={classes.margin}>
 
         <Grid item xs={12} sm={4}>
           <div className={classes.row}>

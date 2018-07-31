@@ -7,22 +7,8 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
-import './PictureGrid.css';
 import Slide from '@material-ui/core/Slide';
-
-const styles = theme => ({
-  root: {
-    display: 'block',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    overflow: 'hidden',
-    backgroundColor: theme.palette.background.paper,
-    height: '100%'
-  },
-  icon: {
-    color: 'rgba(255, 255, 255, 0.54)',
-  },
-});
+import { styles } from "./styles";
 
 class PictureGrid extends Component {
 

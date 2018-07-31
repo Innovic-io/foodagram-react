@@ -84,17 +84,6 @@ class ImageSlider extends Component {
 
 }
 
-/*      <div>
-          <div className={classes.buttonLeft}>
-            {this.leftButton()}
-          </div>
-          <img width={'100%'} src={this.state.slide[this.state.current].path} alt=''/>
-          <div className={classes.buttonRight}>
-            {this.rightButton()}
-          </div>
-        </div>
-**/
-
 ImageSlider.propTypes = {
   classes: PropTypes.object.isRequired,
 };

@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Input from '../../components/text-field/TextField';
 import Comments from '../../components/comments/Comments';
 import ToolBar from '../../components/toolbar/ToolBar'
-import { tileData } from "../../components/picture-grid/tileData/tileData";
+import { tileData } from "../../data/tileData/tileData";
 import PostAvatarUsername from "../../components/post-avatar-username/PostAvatarUsername";
 import { styles } from "./styles";
 import ImageSlider from "../../components/image-slider/ImageSlider";

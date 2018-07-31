@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import UserInfo from "../../components/user-info/UserInfo";
 import Menu from "../../components/menu/Menu";
 import PictureGrid from "../../components/picture-grid/PictureGrid";
-import { tileData } from '../../components/picture-grid/tileData/tileData';
+import { tileData } from '../../data/tileData/tileData';
 
 export default class Profile extends Component {
 
