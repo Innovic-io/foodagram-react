@@ -13,6 +13,8 @@ import PostAvatarUsername from "../../components/post-avatar-username/PostAvatar
 import { styles } from "./styles";
 import ImageSlider from "../../components/image-slider/ImageSlider";
 
+import CommentsService from '../../services/CommentsService';
+
 class PictureView extends Component {
 
   constructor(props) {
@@ -35,6 +37,33 @@ class PictureView extends Component {
     };
   }
 
+  componentDidMount() {
+
+    const commentsService = new CommentsService();
+    commentsService.getComments().then(data => {
+
+      const comments = data.map(item => {
+        return Object.assign({}, {
+          username: item.name,
+          id: item.id,
+          comment: item.body,
+          tags: [],
+        })
+      });
+
+      this.updateState(comments.slice(0, 10))
+
+
+    })
+  }
+
+  updateState = (comments) => {
+    console.log(comments);
+    this.setState({
+      comments
+    });
+  }
+
   onSubmitComment = (data) => {
 
     tileData.find(value => value.id === data.id).comments.push({
@@ -43,7 +72,6 @@ class PictureView extends Component {
       username: 'username',
       tags: []
     });
-
 
     this.setState((prevState, props) => {
       return { comments: tileData.find(value => value.id === data.id).comments }

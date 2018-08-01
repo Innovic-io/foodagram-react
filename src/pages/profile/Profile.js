@@ -58,6 +58,7 @@ export default class Profile extends Component {
 
   render() {
 
+
     return (
       <div>
         <UserInfo name='Jason Momoa' username='mjason'/>
