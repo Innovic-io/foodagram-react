@@ -1,114 +1,144 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
 import Grid from '@material-ui/core/Grid';
-import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import { tileData } from "../../components/picture-grid/tileData/tileData";
-import Bookmark from '@material-ui/icons/Bookmark'
-import IconButton from '@material-ui/core/IconButton';
 
-const styles = theme => ({
-  appBorder: {
-    boxShadow: 'none',
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: 'rgba(0,0,0,.0975)',
-    marginTop: 50,
-    marginBottom: 50,
-    backgroundColor: theme.palette.background.paper,
-  },
-  separator: {
-    borderBottomWidth: 1,
-    borderBottomStyle: 'solid',
-    borderBottomColor: 'rgba(0,0,0,.0975)',
-  },
-  profileName: {
-    textAlign: 'left',
-    marginTop: 20,
-  },
-  img: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  content: {
-    marginTop: 20,
-  },
-  yummiesColor: {
-    color: 'red',
-  },
-  avatar: {
-    margin: 10,
-    justifyContent: 'center',
-  },
-});
+import Input from '../../components/text-field/TextField';
+import Comments from '../../components/comments/Comments';
+import ToolBar from '../../components/toolbar/ToolBar'
+import { tileData } from "../../data/tileData/tileData";
+import PostAvatarUsername from "../../components/post-avatar-username/PostAvatarUsername";
+import { styles } from "./styles";
+import ImageSlider from "../../components/image-slider/ImageSlider";
+
+import CommentsService from '../../services/CommentsService';
 
 class PictureView extends Component {
 
   constructor(props) {
     super(props);
 
-    const { id } = this.props.match.params;
-
-    this.state = {
-      id: id,
-      yummies: tileData.find(value => value.id === id).yummies
-    }
+    this.state = {}
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { id } = nextProps.match.params;
+
+    const currentPicture = tileData.find(value => value.id === id);
+
+    return {
+      id: id,
+      img: currentPicture.img,
+      yummies: currentPicture.yummies,
+      comments: currentPicture.comments,
+      saved: currentPicture.saved,
+    };
+  }
+
+  componentDidMount() {
+
+    const commentsService = new CommentsService();
+    commentsService.getComments().then(data => {
+
+      const comments = data.map(item => {
+        return Object.assign({}, {
+          username: item.name,
+          id: item.id,
+          comment: item.body,
+          tags: [],
+        })
+      });
+
+      this.updateState(comments.slice(0, 10))
+
+
+    })
+  }
+
+  updateState = (comments) => {
+    console.log(comments);
+    this.setState({
+      comments
+    });
+  }
+
+  onSubmitComment = (data) => {
+
+    tileData.find(value => value.id === data.id).comments.push({
+      id: Math.round(Math.random() * 10000000000),
+      comment: data.comment,
+      username: 'username',
+      tags: []
+    });
+
+    this.setState((prevState, props) => {
+      return { comments: tileData.find(value => value.id === data.id).comments }
+    })
+  };
+
   yummiesIncrement = (id) => {
+
     const [ item ] = tileData.filter(value => value.id === id);
+
     this.setState({
       yummies: ++item.yummies,
     });
   };
 
+  addRemoveSaved = (id) => {
+    console.log(this.state.saved);
+    tileData.find(value => value.id === id).saved = !this.state.saved;
+
+    this.setState(prevState => ({
+      saved: !prevState.saved,
+    }))
+  };
   render() {
 
-    const { classes } = this.props;
+    const {classes} = this.props;
 
     return (
       <Grid container className={classes.appBorder}>
+
         <Grid className={classes.img} item xs={12} md={8}>
-          <img width='100%' src={tileData.find(value => value.id === this.state.id).img} alt=''/>
+          <ImageSlider img={this.state.img}/>
         </Grid>
+
         <Grid item xs={12} md={4}>
-          <Grid container className={classes.separator}>
-            <Grid item md={3}>
-              <Avatar src='/images/profilepic.jpg' className={classes.avatar}/>
-            </Grid>
-            <Grid item md={9} >
-              <Typography className={classes.profileName}> Jason Momoa </Typography>
-            </Grid>
-          </Grid>
+          <div className={classes.separator}>
+            <PostAvatarUsername avatar={'/images/profilepic.jpg'} username={'mjason'}/>
+          </div>
+
           <Grid container className={classes.content}>
-            <Grid item xs={4} md={4}>
-              <IconButton>
-                <FavoriteIcon className={ (this.state.yummies >= 5) ? classes.yummiesColor : FavoriteIcon } onClick={ () => this.yummiesIncrement(this.state.id)}/>
-              </IconButton>
-            </Grid>
-            <Grid item xs={4} md={4} >
-              <IconButton>
-                <ShareIcon/>
-              </IconButton>
-            </Grid>
-            <Grid item xs={4} md={4} >
-              <IconButton>
-                <Bookmark/>
-              </IconButton>
-            </Grid>
-            <Grid item xs={12} md={12}>
-              <Typography> {this.state.yummies} people find this yummy</Typography>
-            </Grid>
+            <div className={classes.rightSideFlex}>
+
+              <ToolBar onYummiesIncrement={(pictureID) => this.yummiesIncrement(pictureID)} addRemoveSaved={(picID) => this.addRemoveSaved(picID)} saved={this.state.saved} yummies={this.state.yummies} id={this.state.id}/>
+
+              <Grid item xs={12} md={12} className={classes.sideDisableGrow}>
+                <Typography align={"center"} variant={"caption"}> {this.state.yummies} people find this yummy</Typography>
+              </Grid>
+
+              <div className={classes.sideFlexCommentBox}>
+                <Grid item xs={12} md={12}>
+                  <Comments comments={this.state.comments}/>
+                </Grid>
+              </div>
+
+              <Grid item xs={12} md={12} className={classes.sideDisableGrow}>
+                <Input onSubmitComment={(comment) => this.onSubmitComment(comment)} id={this.state.id}/>
+              </Grid>
+
+            </div>
           </Grid>
         </Grid>
+
       </Grid>
     )
   }
 }
+
 PictureView.propTypes = {
   classes: PropTypes.object.isRequired,
 };
