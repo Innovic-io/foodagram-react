@@ -6,6 +6,7 @@ import Header from "./components/header/Header";
 import PictureView from "./pages/picture-view/PictureView";
 import Profile from "./pages/profile/Profile";
 import Grid from '@material-ui/core/Grid';
+import Login from "./pages/login/Login";
 
 export default class App extends Component {
 
@@ -22,6 +23,7 @@ export default class App extends Component {
               <Switch>
                 <Route exact path='/' component={Profile}/>
                 <Route path='/picture/:id' component={PictureView}/>
+                <Route path='/login' component={Login}/>
               </Switch>
             </Grid>
             <Grid item md={3}/>

@@ -13,55 +13,40 @@ import PostAvatarUsername from "../../components/post-avatar-username/PostAvatar
 import { styles } from "./styles";
 import ImageSlider from "../../components/image-slider/ImageSlider";
 
-import CommentsService from '../../services/CommentsService';
-
 class PictureView extends Component {
-
   constructor(props) {
     super(props);
 
-    this.state = {}
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { id } = nextProps.match.params;
-
+    const { id } = props.match.params;
     const currentPicture = tileData.find(value => value.id === id);
 
-    return {
+    this.state = {
       id: id,
       img: currentPicture.img,
       yummies: currentPicture.yummies,
       comments: currentPicture.comments,
       saved: currentPicture.saved,
-    };
+    }
   }
 
   componentDidMount() {
 
-    const commentsService = new CommentsService();
-    commentsService.getComments().then(data => {
+    fetch('https://jsonplaceholder.typicode.com/comments')
+      .then(response => response.json())
+      .then(data => {
+        const comments = data.map(item => {
+          return Object.assign({}, {
+            username: item.email,
+            id: item.id,
+            comment: item.body,
+            tags: [],
+          })
+        });
 
-      const comments = data.map(item => {
-        return Object.assign({}, {
-          username: item.name,
-          id: item.id,
-          comment: item.body,
-          tags: [],
-        })
-      });
-
-      this.updateState(comments.slice(0, 10))
-
-
-    })
-  }
-
-  updateState = (comments) => {
-    console.log(comments);
-    this.setState({
-      comments
-    });
+        this.setState({
+          comments: comments
+        });
+      })
   }
 
   onSubmitComment = (data) => {
@@ -88,16 +73,17 @@ class PictureView extends Component {
   };
 
   addRemoveSaved = (id) => {
-    console.log(this.state.saved);
+
     tileData.find(value => value.id === id).saved = !this.state.saved;
 
     this.setState(prevState => ({
       saved: !prevState.saved,
     }))
   };
+
   render() {
 
-    const {classes} = this.props;
+    const { classes } = this.props;
 
     return (
       <Grid container className={classes.appBorder}>
@@ -127,7 +113,7 @@ class PictureView extends Component {
               </div>
 
               <Grid item xs={12} md={12} className={classes.sideDisableGrow}>
-                <Input onSubmitComment={(comment) => this.onSubmitComment(comment)} id={this.state.id}/>
+                <Input onSubmitInput={(comment) => this.onSubmitComment(comment)} placeholder='Add a comment' id={this.state.id}/>
               </Grid>
 
             </div>

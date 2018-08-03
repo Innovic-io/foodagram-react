@@ -27,7 +27,6 @@ class Menu extends Component {
 
     const { classes, onGridViewClick, onListViewClick,  onSavedViewClick} = this.props;
     const { value } = this.state;
-    console.log(onListViewClick, onGridViewClick, onSavedViewClick);
 
     return (
       <BottomNavigation value={value} onChange={this.handleChange}>

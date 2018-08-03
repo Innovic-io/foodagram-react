@@ -19,7 +19,7 @@ class Input extends Component {
   submit = (event) => {
     event.preventDefault(); //so that the page does not refresh
 
-    this.props.onSubmitComment({id: this.state.id, comment: this.state.comment});
+    this.props.onSubmitInput({id: this.state.id, comment: this.state.comment});
     this.setState({
       comment: '',
     })
@@ -33,16 +33,16 @@ class Input extends Component {
 
   render() {
 
-    const {classes} = this.props;
+    const {classes, placeholder} = this.props;
 
     return (
       <form className={classes.container} onSubmit={(e) => this.submit(e)}>
         <TextField
           required={true}
-          placeholder="Add a comment"
-          id="comment"
+          placeholder={placeholder}
+          id="textField"
           value={this.state.comment}
-          onChange={this.handleChange('comment')}
+          onChange={this.handleChange('textField')}
           className={classes.inputField}
           InputProps={{
             disableUnderline: true,

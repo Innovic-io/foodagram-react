@@ -10,20 +10,13 @@ const styles = {
 
 class Comments extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      comments: props.comments,
-    };
-  }
-
   render() {
+
+    const { comments } = this.props;
 
     return(
       <List disablePadding={true}>
-        {
-        this.state.comments.map(comment => (
+        {comments.map(comment => (
           <ListItem disableGutters={true}  key={comment.id}>
             <ListItemText
               primary={comment.comment}

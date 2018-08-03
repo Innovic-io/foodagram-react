@@ -1,9 +1,22 @@
 export const styles = {
-  flex: {
-    textAlign: 'left',
-    flexGrow: 1
+  header: {
+    marginTop: 20,
+    textAlign: 'center'
   },
-  icons: {
-    marginRight: '30px'
-  }
+  card: {
+    flexDirection: 'column',
+    maxWidth: 400,
+    margin: '20px auto',
+  },
+  cardActions: {
+    width: '300px',
+    flexDirection: 'column',
+    margin: '20px auto',
+  },
+  paper: {
+    margin: '20px auto',
+    paddingTop: 20,
+    paddingBottom: 20,
+    maxWidth: 400,
+  },
 };
