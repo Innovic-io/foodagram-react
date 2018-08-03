@@ -14,10 +14,15 @@ import TextField from '../../components/text-field/TextField'
 
 class Login extends Component {
 
-  onSubmitInput = () => {
+  onSubmitUsername = (data) => {
 
   };
+  onSubmitPassword = (data) => {
 
+  };
+  buttonSubmit = () => {
+
+  };
   render() {
 
     const { classes } = this.props;
@@ -28,26 +33,26 @@ class Login extends Component {
         <Card className={classes.card}>
           <CardHeader title='Foodagram' className={classes.header}/>
           <CardActions className={classes.cardActions}>
-            <div style={{margin: 5, width: '100%'}}>
-              <TextField onSubmitInput={() => this.onSubmitInput()} placeholder='Phone number, username, or email' id='username'/>
+            <div className={classes.div}>
+              <TextField onSubmitInput={(data) => this.onSubmitUsername(data)} placeholder='Phone number, username, or email' id='username'/>
             </div>
-            <div style={{margin: 5, width: '100%'}}>
-              <TextField onSubmitInput={() => this.onSubmitInput()} placeholder='Password' id='password'/>
+            <div className={classes.div}>
+              <TextField onSubmitInput={() => this.onSubmitPassword()} placeholder='Password' id='password'/>
             </div>
             <div style={{width: '100%'}}>
-              <Button style={{width: '100%'}} variant='contained' color='primary'>Log in</Button>
+              <Button onClick={() => this.buttonSubmit()} style={{width: '100%', marginTop: 5}} disabled={true} variant='contained' color='primary'>Log in</Button>
             </div>
           </CardActions>
-          <CardContent>
+          <CardContent style={{textAlign: 'center'}}>
             <Typography variant='caption'>
-              Forgot password?
+              <a href='/'>Forgot password?</a>
             </Typography>
           </CardContent>
         </Card>
         <Paper className={classes.paper}>
           <Typography>
             Don't have an account?
-            <a href='/'>Sign up</a>
+            <a href='/'> Sign up</a>
           </Typography>
         </Paper>
       </div>

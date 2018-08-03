@@ -53,14 +53,14 @@ class PictureView extends Component {
 
     tileData.find(value => value.id === data.id).comments.push({
       id: Math.round(Math.random() * 10000000000),
-      comment: data.comment,
+      comment: data.textField,
       username: 'username',
       tags: []
     });
 
-    this.setState((prevState, props) => {
-      return { comments: tileData.find(value => value.id === data.id).comments }
-    })
+    this.setState({
+        comments: tileData.find(value => value.id === data.id).comments
+      })
   };
 
   yummiesIncrement = (id) => {

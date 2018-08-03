@@ -9,7 +9,7 @@ export const styles = {
     margin: '20px auto',
   },
   cardActions: {
-    width: '300px',
+    width: '350px',
     flexDirection: 'column',
     margin: '20px auto',
   },
@@ -18,5 +18,10 @@ export const styles = {
     paddingTop: 20,
     paddingBottom: 20,
     maxWidth: 400,
+    textAlign: 'center'
   },
+  div: {
+    margin: 5,
+    width: '100%',
+  }
 };

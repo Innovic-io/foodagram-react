@@ -12,22 +12,22 @@ class Input extends Component {
 
     this.state = {
       id: this.props.id,
-      comment: ''
+      textField: ''
     }
   }
 
   submit = (event) => {
     event.preventDefault(); //so that the page does not refresh
 
-    this.props.onSubmitInput({id: this.state.id, comment: this.state.comment});
+    this.props.onSubmitInput({id: this.state.id, textField: this.state.textField});
     this.setState({
-      comment: '',
+      textField: '',
     })
   };
 
-  handleChange = comment => event => {
+  handleChange = textField => event => {
     this.setState({
-      comment: event.target.value,
+      textField: event.target.value,
     })
   };
 
@@ -41,7 +41,7 @@ class Input extends Component {
           required={true}
           placeholder={placeholder}
           id="textField"
-          value={this.state.comment}
+          value={this.state.textField}
           onChange={this.handleChange('textField')}
           className={classes.inputField}
           InputProps={{
