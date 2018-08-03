@@ -1,6 +1,7 @@
 {
   "name": "foodagram",
   "version": "0.1.0",
+  "homepage": "http://<username>.github.io/<reponame>",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^1.2.3",
